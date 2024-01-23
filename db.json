@@ -1,0 +1,126 @@
+{
+  "data": {
+    "carts": [
+      {
+        "id": 1,
+        "imageUrl": "@/assets/images/1.png",
+        "isFlipped": false
+      },
+      {
+        "id": 2,
+        "imageUrl": "@/assets/images/2.png",
+        "isFlipped": false
+      },
+      {
+        "id": 3,
+        "imageUrl": "@/assets/images/3.png",
+        "isFlipped": false
+      },
+      {
+        "id": 4,
+        "imageUrl": "@/assets/images/4.png",
+        "isFlipped": false
+      },
+      {
+        "id": 5,
+        "imageUrl": "@/assets/images/5.png",
+        "isFlipped": false
+      },
+      {
+        "id": 6,
+        "imageUrl": "@/assets/images/6.png",
+        "isFlipped": false
+      },
+      {
+        "id": 7,
+        "imageUrl": "@/assets/images/7.png",
+        "isFlipped": false
+      },
+      {
+        "id": 8,
+        "imageUrl": "@/assets/images/8.png",
+        "isFlipped": false
+      },
+      {
+        "id": 9,
+        "imageUrl": "@/assets/images/9.png",
+        "isFlipped": false
+      },
+      {
+        "id": 10,
+        "imageUrl": "@/assets/images/10.png",
+        "isFlipped": false
+      },
+      {
+        "id": 11,
+        "imageUrl": "@/assets/images/11.png",
+        "isFlipped": false
+      },
+      {
+        "id": 12,
+        "imageUrl": "@/assets/images/12.png",
+        "isFlipped": false
+      },
+      {
+        "id": 13,
+        "imageUrl": "@/assets/images/13.png",
+        "isFlipped": false
+      },
+      {
+        "id": 14,
+        "imageUrl": "@/assets/images/14.png",
+        "isFlipped": false
+      },
+      {
+        "id": 15,
+        "imageUrl": "@/assets/images/15.png",
+        "isFlipped": false
+      },
+      {
+        "id": 16,
+        "imageUrl": "@/assets/images/16.png",
+        "isFlipped": false
+      },
+      {
+        "id": 17,
+        "imageUrl": "@/assets/images/17.png",
+        "isFlipped": false
+      },
+      {
+        "id": 18,
+        "imageUrl": "@/assets/images/18.png",
+        "isFlipped": false
+      },
+      {
+        "id": 19,
+        "imageUrl": "@/assets/images/19.png",
+        "isFlipped": false
+      },
+      {
+        "id": 20,
+        "imageUrl": "@/assets/images/20.png",
+        "isFlipped": false
+      },
+      {
+        "id": 21,
+        "imageUrl": "@/assets/images/21.png",
+        "isFlipped": false
+      },
+      {
+        "id": 22,
+        "imageUrl": "@/assets/images/22.png",
+        "isFlipped": false
+      },
+      {
+        "id": 23,
+        "imageUrl": "@/assets/images/23.png",
+        "isFlipped": false
+      },
+      {
+        "id": 24,
+        "imageUrl": "@/assets/images/24.png",
+        "isFlipped": false
+      }
+    ]
+  }
+}
