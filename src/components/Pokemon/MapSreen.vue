@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { gameStore } from '@/stores/pokemon'
 import { computed, ref } from 'vue'
+import EndGameScreen from '@/components/Pokemon/EndGameScreen.vue'
+
 const props = defineProps(['map'])
 interface Card {
   id: number
@@ -8,8 +10,20 @@ interface Card {
   isFlipped: boolean
 }
 
+const isComplete = computed(() => {
+  return gameStore.state.isCompleted
+})
+
 const cards = computed(() => {
   return gameStore.state.cards
+})
+
+const flipsCount = computed(() => {
+  return gameStore.state.counter.counter
+})
+
+const counterMatch = computed(() => {
+  return gameStore.state.counterMatch
 })
 
 const boardStyle = ref({
@@ -27,13 +41,17 @@ const handleCardClick = (card: Card) => {
   gameStore.flipCard(card.id) // Pass the card's id to the flipCard method
   gameStore.checkMatch() // Check if there is a match after a flip
 }
+const resetGame = () => {
+  gameStore.resetGame()
+  sizeMap(props.map, props.map)
+}
 </script>
 
 <template>
-  <div class="game-container">
+  <div v-if="!isComplete" class="game-container">
     <header class="game-header">
-      <h1>Your Score: 100</h1>
-      <h2>Flips: 99</h2>
+      <h1>Your Score: {{ counterMatch }}</h1>
+      <h2>Flips: {{ flipsCount }}</h2>
     </header>
     <div class="game-board" :style="boardStyle">
       <div v-for="card in cards" :key="card.id" class="card">
@@ -45,8 +63,10 @@ const handleCardClick = (card: Card) => {
           height="100"
         />
       </div>
+      <button @click="resetGame">Reset Game</button>
     </div>
   </div>
+  <EndGameScreen v-else />
 </template>
 
 <style scoped>
@@ -73,5 +93,13 @@ const handleCardClick = (card: Card) => {
 .card {
   border: solid;
   border-color: #d47fdd;
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background: #ddbfce;
 }
 </style>

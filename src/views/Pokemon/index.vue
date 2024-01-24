@@ -23,14 +23,6 @@ function clickSelectMap(map: number) {
         <h2>6x6</h2>
         <p>Normal</p>
       </div>
-      <div class="map-option" @click="clickSelectMap(8)">
-        <h2>8x8</h2>
-        <p>Hard</p>
-      </div>
-      <div class="map-option" @click="clickSelectMap(10)">
-        <h2>10x10</h2>
-        <p>Supper Hard</p>
-      </div>
     </div>
     <p class="footer">This game by <span>Xuan Truong</span></p>
   </div>
