@@ -75,3 +75,9 @@ span {
   font-family: serif;
   margin-top: 150px;
 }
+
+.map_list {
+  display: flex;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 20px;
+}
