@@ -4,6 +4,7 @@ import { ref } from 'vue'
 
 const isShowIntro = ref(true)
 const mapSelect = ref(0)
+
 function clickSelectMap(map: number) {
   mapSelect.value = map
   isShowIntro.value = false
@@ -15,6 +16,10 @@ function clickSelectMap(map: number) {
     <h1>POKE MEMORIES</h1>
     <p class="text">Select mode to start game</p>
     <div class="map-options">
+      <div class="map-option" @click="clickSelectMap(2)">
+        <h2>2x2</h2>
+        <p>Very Easy</p>
+      </div>
       <div class="map-option" @click="clickSelectMap(4)">
         <h2>4x4</h2>
         <p>Easy</p>

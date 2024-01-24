@@ -16,6 +16,8 @@ interface GameState {
   counter: CounterFlippedCards
   counterMatch: number
   isCompleted: boolean
+  timeElapsed: number
+  timerId?: number
 }
 
 const initialState: GameState = {
@@ -204,19 +206,17 @@ const initialState: GameState = {
   flippedCards: [],
   counter: { counter: 0 },
   counterMatch: 0,
-  isCompleted: false
+  isCompleted: false,
+  timeElapsed: 0
 }
 
-// Sử dụng reactive() để tạo một reactive state cho trò chơi
 const state = reactive<GameState>({ ...initialState })
 
-// Bạn có thể định nghĩa các hàm để xử lý logic của trò chơi.
 function flipCard(cardId: number) {
   const cardToFlip = state.cards.find((card) => card.id === cardId)
   if (cardToFlip && !cardToFlip.isFlipped) {
     cardToFlip.isFlipped = true
     state.flippedCards.push(cardToFlip)
-    console.log('state.flippedCards', state.flippedCards)
   }
 }
 
@@ -225,41 +225,49 @@ function checkMatch() {
     state.counter.counter++
     const [card1, card2] = state.flippedCards
     if (card1.imageUrl !== card2.imageUrl) {
-      // Không khớp, lật lại sau một khoảng thời gian
       setTimeout(() => {
         card1.isFlipped = false
         card2.isFlipped = false
         state.flippedCards = []
-      }, 1000)
+      }, 500)
     } else {
-      // Khớp, giữ chúng được lật
       state.counterMatch++
       state.flippedCards = []
       checkComplete()
     }
   }
 }
+
+function startTimer() {
+  if (state.timerId) clearInterval(state.timerId)
+
+  state.timerId = setInterval(() => {
+    state.timeElapsed++
+  }, 1000)
+}
+
+function stopTimer() {
+  if (state.timerId) {
+    clearInterval(state.timerId)
+  }
+}
+
 function selectMapGame(rows: number, columns: number) {
   const totalPairs = (rows * columns) / 2
-  // Đảm bảo danh sách initialCards đủ để tạo các cặp
   const availableCards = initialState.cards.slice(0, totalPairs)
   const cards: Card[] = []
 
-  // Tạo cặp card với cùng imageUrl nhưng các id khác nhau
   availableCards.forEach((card) => {
-    // Tạo cặp card đầu tiên
     const cardPair1: Card = { id: card.id * 2 - 1, imageUrl: card.imageUrl, isFlipped: false }
-    // Tạo cặp card thứ hai với id+1
     const cardPair2: Card = { id: card.id * 2, imageUrl: card.imageUrl, isFlipped: false }
     cards.push(cardPair1, cardPair2)
   })
-  // Trộn danh sách cards
   for (let i = cards.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1))
     ;[cards[i], cards[j]] = [cards[j], cards[i]]
   }
   state.isCompleted = false
-  // Cập nhật trạng thái game với danh sách card mới
+  startTimer()
   Object.assign(state, {
     ...initialState,
     cards: cards
@@ -269,17 +277,17 @@ function selectMapGame(rows: number, columns: number) {
 function checkComplete() {
   const totalPairs = state.cards.length / 2
   if (state.counterMatch === totalPairs) {
+    stopTimer()
     state.isCompleted = true
   }
 }
 
 function resetGame() {
-  Object.assign(state, { ...initialState })
-  // Khi đặt lại trò chơi, bạn có thể trộn thẻ tại đây nếu cần thiết
+  location.reload()
 }
 
 export const gameStore = {
-  state: readonly(state), // Readonly để ngăn không cho state bị thay đổi trực tiếp
+  state: readonly(state),
   flipCard,
   checkMatch,
   resetGame,

@@ -18,14 +18,6 @@ const cards = computed(() => {
   return gameStore.state.cards
 })
 
-const flipsCount = computed(() => {
-  return gameStore.state.counter.counter
-})
-
-const counterMatch = computed(() => {
-  return gameStore.state.counterMatch
-})
-
 const boardStyle = ref({
   gridTemplateColumns: `repeat(${props.map}, 1fr)`
 })
@@ -41,17 +33,12 @@ const handleCardClick = (card: Card) => {
   gameStore.flipCard(card.id) // Pass the card's id to the flipCard method
   gameStore.checkMatch() // Check if there is a match after a flip
 }
-const resetGame = () => {
-  gameStore.resetGame()
-  sizeMap(props.map, props.map)
-}
 </script>
 
 <template>
   <div v-if="!isComplete" class="game-container">
     <header class="game-header">
-      <h1>Your Score: {{ counterMatch }}</h1>
-      <h2>Flips: {{ flipsCount }}</h2>
+      <h1>POKE MEMORIES</h1>
     </header>
     <div class="game-board" :style="boardStyle">
       <div v-for="card in cards" :key="card.id" class="card">
@@ -63,7 +50,6 @@ const resetGame = () => {
           height="100"
         />
       </div>
-      <button @click="resetGame">Reset Game</button>
     </div>
   </div>
   <EndGameScreen v-else />

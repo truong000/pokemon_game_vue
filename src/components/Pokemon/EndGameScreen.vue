@@ -1,11 +1,17 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { gameStore } from '@/stores/pokemon'
+
+const resetGame = () => {
+  gameStore.resetGame()
+}
+</script>
 
 <template>
   <div class="map-game">
     <h1>✨ Congratulations ✨</h1>
     <h2>🍓🍓🍓🍓🍓🍓🍓🍓🍓🍓🍓🍓</h2>
-    <h3>Your Score: 100</h3>
-    <button>Start Again</button>
+    <h3>Your Score: {{ gameStore.state.timeElapsed }}s</h3>
+    <button @click="resetGame">Start Again</button>
     <p class="footer">This game by <span>Xuan Truong</span></p>
   </div>
 </template>
